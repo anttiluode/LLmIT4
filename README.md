@@ -26,7 +26,7 @@ LLMit is a Flask-based application designed for generating posts and comments us
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/llmit.git
+git clone https://github.com/anttiluode/LLmIT4.git
 cd llmit
 ```
 
