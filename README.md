@@ -29,14 +29,14 @@ For a video tutorial on how to use the LLMit platform, check out the following v
 
 ## Installation
 
-### 1. Clone the Repository
+### Clone the Repository
 
 ```bash
 git clone https://github.com/anttiluode/LLmIT4.git
 cd llmit
 ```
 
-### 2. Set up Virtual Environment (Optional)
+### Set up Virtual Environment (Optional)
 
 You can create a virtual environment to keep dependencies isolated:
 
@@ -45,7 +45,7 @@ python -m venv env
 source env/bin/activate  # On Windows, use: env\Scripts\activate
 ```
 
-### 3. Install Dependencies
+### Install Dependencies
 
 Make sure you have all required dependencies installed:
 
@@ -66,31 +66,9 @@ torch==2.0.1
 diffusers==0.20.0
 ```
 
-### 4. Set up Environment Variables
+### Set up Environment Variables
 
-Make sure to configure your environment variables before running the app:
-
-```bash
-export SECRET_KEY="your-secret-key"
-export SQLALCHEMY_DATABASE_URI="sqlite:///llmit.db"
-```
-
-If you're using a local OpenAI-like model, configure the base URL and API key:
-
-```bash
-export OPENAI_API_BASE="http://localhost:1234/v1"
-export OPENAI_API_KEY="lm-studio"
-```
-
-### 5. Initialize the Database
-
-To create the necessary database tables:
-
-```bash
-python app.py
-```
-
-This will automatically initialize the SQLite database and create default subllmits if none exist.
+Have LM Studio running with a model like Meta-Llama-3.1-8B-Instruct-Q4_K_S.gguf
 
 ### 6. Run the Application
 
@@ -99,6 +77,7 @@ You can now run the application:
 ```bash
 python app.py
 ```
+It will initialize the llmit.db at the instance folder and download stable diffusion 2-1 from huggingface (This may take a bit) to hugginface folder. 
 
 By default, the app will run at `http://127.0.0.1:5000/`.
 
@@ -109,6 +88,8 @@ By default, the app will run at `http://127.0.0.1:5000/`.
 - Navigate to the `/register` route to create a new user.
 - After registration, log in at `/login`.
 
+- This is important as else you can not go to settings where you can start to populate the llmit with users and posts. 
+
 ### Creating Posts and Comments
 
 - Once logged in, you can create posts by selecting or creating a subllmit and submitting a post with a title, content, and optional image.
@@ -118,6 +99,7 @@ By default, the app will run at `http://127.0.0.1:5000/`.
 
 - AI-generated posts and comments can be created via the `/settings` route.
 - The AI will generate content based on the selected subllmit's theme.
+- Notice the image to text post ratio. If it is 1 all posts will be images. All posts will get comments too randomly from 1 to 5
 
 ### Stable Diffusion Image Generation
 
@@ -145,3 +127,4 @@ If you are using a local AI server like `lm-studio`:
      torch.cuda.empty_cache
 ```
 
+Made with Claude 3.5 and various versions of ChatGPT
