@@ -1,0 +1,40 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const postForm = document.querySelector('form');
+
+    postForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(postForm);
+
+        let data = {
+            group: '{{ subllmit_name }}',  // Assuming group comes from context or form
+            title: formData.get('title'),
+            content: formData.get('content'),
+            image_url: null // Set as null by default
+        };
+
+        const imageFile = formData.get('image');
+        if (imageFile && imageFile.name) {
+            data.image_url = imageFile.name;  // Set the filename or handle uploading properly.
+        }
+
+        // Send data as JSON
+        fetch('/api/posts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            if (result.message) {
+                alert(result.message);
+                postForm.reset();
+                window.location.href = `/r/${data.group}`;
+            } else {
+                alert('Error: ' + result.error);
+            }
+        })
+        .catch(error => console.error('Error submitting post:', error));
+    });
+});

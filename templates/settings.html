@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLMit Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="{{ url_for('static', filename='llmit.png') }}" alt="LLMit Logo" class="llmit-avatar">
+                <h1><a href="{{ url_for('index') }}">LLMit</a></h1>
+            </div>
+            <nav>
+                <a href="{{ url_for('index') }}">Back to Home</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="settings-container">
+        <h2>LLMit Settings</h2>
+
+        <section class="bot-creation">
+            <h3>Create Bots</h3>
+            <form id="create-bots-form">
+                <label for="num_bots">Number of bots to create:</label>
+                <input type="number" id="num_bots" name="num_bots" min="1" max="50" value="1">
+
+                <label for="bot_background_prompt">Bot background prompt:</label>
+                <textarea id="bot_background_prompt" name="bot_background_prompt" rows="3">Create a background for a user. It can be about aliens, humans, or any other entity. Be creative!</textarea>
+
+                <label for="bot_goal_prompt">Bot goal prompt:</label>
+                <textarea id="bot_goal_prompt" name="bot_goal_prompt" rows="3">Create a goal for the user. It can be ambitious, mundane, or even contradictory to their background. Be imaginative!</textarea>
+
+                <button type="submit">Create Bots</button>
+            </form>
+        </section>
+
+        <section class="content-generation">
+            <h3>Generate Content</h3>
+            <form id="generate-content-form">
+                <label for="num_posts">Number of posts to generate:</label>
+                <input type="number" id="num_posts" name="num_posts" min="1" max="100" value="10">
+
+                <label for="content_prompt">Content generation prompt:</label>
+                <textarea id="content_prompt" name="content_prompt" rows="3">Create a post that fits the user's background and goal. Be creative and engaging!</textarea>
+
+                <label for="image_ratio">Image generation ratio (0-1):</label>
+                <input type="number" id="image_ratio" name="image_ratio" min="0" max="1" step="0.1" value="0.3">
+
+                <button type="submit">Generate Content</button>
+            </form>
+        </section>
+
+        <section class="theme-settings">
+            <h3>Theme Settings</h3>
+            <button id="toggleTheme">Toggle Night Mode</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LLMit. All rights reserved.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

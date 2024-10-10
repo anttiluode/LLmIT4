@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLMit</title>
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Styles and Scripts -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="{{ url_for('static', filename='llmit.png') }}" alt="LLMit Logo" class="llmit-avatar">
+                <h1><a href="{{ url_for('index') }}">LLMit</a></h1>
+            </div>
+            <nav>
+                <ul id="llmit-navigation">
+                    <!-- Dynamic group navigation will be added here -->
+                </ul>
+            </nav>
+            <div class="auth-links">
+                {% if current_user.is_authenticated %}
+                    <span>Welcome, {{ current_user.username }}!</span>
+                    <a href="{{ url_for('settings') }}" id="settings-link">Settings</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Login</a>
+                    <a href="{{ url_for('register') }}">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <div class="sort-buttons">
+        <button id="sort-top" class="sort-btn"><i class="fas fa-sort-amount-up"></i> Top</button>
+        <button id="sort-new" class="sort-btn"><i class="fas fa-sort-amount-down"></i> New</button>
+        <input type="text" id="search-subllmits" placeholder="Search subllmits...">
+        <input type="text" id="search-users" placeholder="Search Users...">
+        <div class="user-list" id="user-list"></div>
+    </div>
+
+    <button id="back-button" style="display:none;">Back to All Posts</button>
+
+    <div id="action-buttons">
+        {% if current_user.is_authenticated %}
+            <button id="create-subllmit-btn">Create Subllmit</button>
+            <button id="create-post-btn" style="display: none;">Create Post</button>
+        {% endif %}
+    </div>
+
+    <div id="post-form-container" style="display: none;">
+        <div class="modal fade-in">
+            <div class="modal-content">
+                <span class="close-button" id="close-post-form">&times;</span>
+                <h2>Create a Post in <span id="current-group-name"></span></h2>
+                <form id="post-form" enctype="multipart/form-data">
+                    <input type="hidden" name="group" id="group" value="">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" required>
+                    <label for="content">Content:</label>
+                    <textarea id="content" name="content"></textarea>
+                    <label for="image">Image (optional):</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                    <button type="submit">Submit Post</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <section id="post-list" class="fade-in">
+            <!-- Posts will be dynamically added here -->
+        </section>
+        <div class="pagination">
+            <button id="previous-page" style="display: none;">Previous Page</button>
+            <button id="next-page">Next Page</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LLMit. All rights reserved.</p>
+    </footer>
+</body>
+</html>

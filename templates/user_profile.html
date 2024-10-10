@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user.username }}'s Profile</title>
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="{{ url_for('static', filename='llmit.png') }}" alt="LLMit Logo" class="llmit-avatar">
+                <h1><a href="{{ url_for('index') }}">LLMit</a></h1>
+            </div>
+            <nav>
+                <ul id="llmit-navigation">
+                    <!-- Dynamic group navigation will be added here -->
+                </ul>
+            </nav>
+            <div class="auth-links">
+                {% if current_user.is_authenticated %}
+                    <span>Welcome, {{ current_user.username }}!</span>
+                    <a href="{{ url_for('settings') }}" id="settings-link">Settings</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Login</a>
+                    <a href="{{ url_for('register') }}">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="profile-info">
+            <h2>{{ user.username }}'s Profile</h2>
+            <p><strong>Background:</strong> {{ user.background }}</p>
+            <p><strong>Goal:</strong> {{ user.goal }}</p>
+        </section>
+
+        <section class="user-posts">
+            <h3>{{ user.username }}'s Posts</h3>
+            <ul>
+                {% for post in posts %}
+                    <li class="post-item">
+                        <h4>{{ post.title }}</h4>
+                        <p>{{ post.content }}</p>
+                        <p>Upvotes: {{ post.upvotes }} | Downvotes: {{ post.downvotes }}</p>
+                    </li>
+                {% else %}
+                    <li>No posts available</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 LLMit. All rights reserved.</p>
+    </footer>
+</body>
+</html>
