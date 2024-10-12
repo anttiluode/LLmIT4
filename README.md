@@ -56,14 +56,19 @@ pip install -r requirements.txt
 If you don't have a `requirements.txt`, here's an example content:
 
 ```plaintext
+werkzeug==2.0.3
 Flask==2.1.2
 Flask-SQLAlchemy==2.5.1
 Flask-Bcrypt==1.0.1
 Flask-Login==0.5.0
 SQLAlchemy==1.4.22
-openai==0.27.0
+openai
 torch==2.0.1
 diffusers==0.20.0
+requests==2.28.1
+transformers
+accelerate
+numpy==1.26.0
 ```
 
 ### Set up Environment Variables
