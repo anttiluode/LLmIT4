@@ -43,11 +43,11 @@ torch.cuda.empty_cache()
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Initialize the Stable Diffusion Pipeline
+# Initialize the Stable Diffusion Pipelinepipe = StableDiffusionPipeline.from_pretrained(
 pipe = StableDiffusionPipeline.from_pretrained(
     "stabilityai/stable-diffusion-2-1",
     cache_dir=cache_directory,
-    torch_dtype=torch.float16,
-    revision="fp16"
+    torch_dtype=torch.float32  # Change to full precision
 )
 pipe.to(device)
 
