@@ -220,9 +220,12 @@ def generate_post_content(user_profile, group_name, content_prompt):
         """
         temperature = get_variable_temperature()
         completion = client.chat.completions.create(
+# the model here does not really matter using default lm studio in default server mode
+# it does matter if you are using tha playground with multiple models 
             model="bullerwins/Meta-Llama-3.1-8B-Instruct-GGUF",
             messages=[{"role": "user", "content": prompt}],
             temperature=temperature,
+# the max tokens sets the max length of the post            
             max_tokens=1000
         )
         response_content = completion.choices[0].message.content.strip()
