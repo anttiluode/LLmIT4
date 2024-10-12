@@ -223,7 +223,7 @@ def generate_post_content(user_profile, group_name, content_prompt):
             model="bullerwins/Meta-Llama-3.1-8B-Instruct-GGUF",
             messages=[{"role": "user", "content": prompt}],
             temperature=temperature,
-            max_tokens=300
+            max_tokens=1000
         )
         response_content = completion.choices[0].message.content.strip()
 
